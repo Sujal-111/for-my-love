@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Human</title>
+    <style>
+        :root {
+            --corporate-blue: #2c3e50;
+            --love-pink: #ffafbd;
+            --love-red: #ff4d6d;
+        }
+
+        body, html {
+            margin: 0; padding: 0; min-height: 100%; width: 100%;
+            font-family: 'Courier New', Courier, monospace;
+            transition: background 1s ease;
+            scroll-behavior: smooth;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .active { display: flex; }
+
+        .corporate-bg { background-color: #f4f4f4; color: var(--corporate-blue); }
+        
+        .restricted-box {
+            border: 2px solid var(--corporate-blue);
+            padding: 20px;
+            background: white;
+            box-shadow: 5px 5px 0px #aaa;
+        }
+
+        .btn {
+            margin-top: 15px;
+            padding: 12px 24px;
+            border: none;
+            background: var(--corporate-blue);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid var(--corporate-blue);
+            background: white;
+            cursor: pointer;
+        }
+
+        .glitch {
+            animation: glitch-anim 0.2s linear infinite;
+            background: #000 !important;
+            color: #0f0 !important;
+        }
+
+        @keyframes glitch-anim {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            100% { transform: translate(0); }
+        }
+
+        .romantic-bg {
+            background: linear-gradient(to bottom, #ffafbd, #ffc3a0);
+            font-family: 'Georgia', serif;
+            color: #5d2a42;
+        }
+
+        .final-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .big-yes {
+            background-color: var(--love-red) !important;
+            font-size: 1.4rem !important;
+            border-radius: 50px !important;
+        }
+
+        #noBtn {
+            background-color: #999;
+            border-radius: 50px;
+            position: relative;
+        }
+
+        #gallery {
+            display: none;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .featured {
+            grid-column: span 2;
+            height: 250px;
+        }
+    </style>
+</head>
+<body class="corporate-bg">
+
+    <div id="landing" class="screen active">
+        <div class="restricted-box">
+            <h2 style="color: red;">⚠️ RESTRICTED ⚠️</h2>
+            <p><b>Subject:</b> I Have Something for you </p>
+            <p><b>Personnel:</b> Shreyaa Mam ❤️ </p>
+            <button class="btn" onclick="nextScreen('q1')">Log In</button>
+        </div>
+    </div>
+
+    <div id="q1" class="screen">
+        <h3>Question 1:</h3>
+        <p> Choose one favorite food...</p>
+        <button class="quiz-option" onclick="nextScreen('q2')"> Noodles </button>
+        <button class="quiz-option" onclick="nextScreen('q2')"> Dosa </button>
+        <button class="quiz-option" onclick="nextScreen('q2')"> Momo </button>
+    </div>
+
+    <div id="q2" class="screen">
+        <h3>Question 2:</h3>
+        <p> Which is your favorite Sweet? </p>
+        <button class="quiz-option" onclick="nextScreen('q3')">Me 🥹</button>
+        <button class="quiz-option" onclick="nextScreen('q3')">Gulabjamun 😍</button>
+        <button class="quiz-option" onclick="nextScreen('q3')">God nahi avdat 😒</button>
+    </div>
+
+    <div id="q3" class="screen">
+        <h3>Question 3:</h3>
+        <p>How cute are you when you’re angry 😡?</p>
+        <button class="quiz-option" onclick="nextScreen('q4')">11/10</button>
+        <button class="quiz-option" onclick="nextScreen('q4')">Infinite 😍</button>
+        <button class="quiz-option" onclick="nextScreen('q4')">Infinite++ 🫶</button>
+    </div>
+
+    <div id="q4" class="screen">
+        <h3>Final Step:</h3>
+        <p>Calculating evaluation results...</p>
+        <button class="btn" onclick="triggerGlitch()">See Results</button>
+    </div>
+
+    <div id="proposal" class="screen romantic-bg">
+        <div class="final-card" id="proposalCard">
+            <h1 id="proposalTitle">I lied about the review...</h1>
+            <p id="proposalText">I just wanted to ask you something important.</p>
+            <h2 id="question">Will you be mine forever?</h2>
+            
+            <div id="actionButtons" style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="btn big-yes" onclick="showLove()">YES! ❤️</button>
+                <button id="noBtn" class="btn" onmouseover="moveNo()" onclick="moveNo()">No 😤</button>
+            </div>
+
+            <div id="gallery">
+                <h3 style="grid-column: span 2;"> I love you Shreyuuu❤️! </h3>
+                <img src="pic1.jpeg" class="gallery-img featured" alt="Featured Memory">
+                <img src="pic2.jpeg" class="gallery-img" alt="Memory 2">
+                <img src="pic3.jpeg" class="gallery-img" alt="Memory 3">
+                <img src="pic4.jpeg" class="gallery-img" alt="Memory 4">
+                <img src="pic5.jpeg" class="gallery-img" alt="Memory 5">
+                <p style="grid-column: span 2; font-style: italic; margin-top: 10px;">Looking forward to a lifetime of more memories with you😍!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function nextScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function triggerGlitch() {
+            document.body.classList.add('glitch');
+            setTimeout(() => {
+                document.body.classList.remove('glitch');
+                document.body.classList.remove('corporate-bg');
+                nextScreen('proposal');
+            }, 800);
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function showLove() {
+            document.getElementById('actionButtons').style.display = 'none';
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('proposalText').style.display = 'none';
+            document.getElementById('proposalTitle').innerText = "your Best Photots❤️ but now you stop sending🥹 ";
+            document.getElementById('gallery').style.display = 'grid';
+            setTimeout(() => {
+                window.scrollTo(0, document.body.scrollHeight);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
